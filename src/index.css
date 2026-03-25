@@ -1,0 +1,452 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* ポイント獲得 */
+.point-effect {
+  position: absolute;
+  left: 240px;
+  top: 5;
+  font-size: 30px;
+  font-weight: bold;
+  color: orange;
+  animation: floatUp 2s ease-out;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* 旧レベルアップ */
+.level-up {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 32px;
+  font-weight: bold;
+  color: gold;
+
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px 40px;
+  border-radius: 10px;
+
+  animation: zoomIn 0.5s ease-out;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 旧目標達成 */
+.goal-achieved {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 28px;
+  font-weight: bold;
+  color: #00ffcc;
+
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 40px;
+  border-radius: 12px;
+
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translate(-50%, 20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+/* アニメーションへ切り替え */
+.effect-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  object-fit: cover; /* 画面いっぱいに広げる */
+
+  z-index: 9999; /* 最前面 */
+  pointer-events: none; /* クリック邪魔しない */
+}
+
+/* 全体 */
+.child-container {
+  text-align: center;
+  background: linear-gradient(135deg, #a0e9ff, #ffd6ff);
+  min-height: 100vh;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+}
+
+/* タイトル */
+.title {
+  font-size: 28px;
+  color: #020f4d;
+  margin-bottom: 20px;
+}
+
+/* ステータスカード */
+.status-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 0 auto 20px;
+  width: 300px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* ポイント */
+.point {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff9f1c;
+}
+
+/* TODOリスト */
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* TODOアイテム */
+.todo-item {
+  background: white;
+  margin: 10px auto;
+  padding: 15px;
+  width: 300px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ボタン */
+.todo-item button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.todo-item button:hover {
+  background: #45a049;
+}
+
+.done {
+  opacity: 0.5;
+}
+
+.todo-text {
+  text-align: left;
+}
+
+.todo-title {
+  font-weight: bold;
+}
+
+.todo-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.parent-container {
+  padding: 20px;
+  background: #f5f7fa;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.parent-title {
+  margin-bottom: 20px;
+}
+
+.card {
+  background: white;
+  margin: 15px auto;
+  padding: 20px;
+  width: 320px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.button-group {
+  margin-top: 20px;
+}
+
+.button-group button {
+  margin: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #4a90e2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button-group button:hover {
+  background: #357abd;
+}
+
+.todo-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.todo-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px; /* 余白追加 */
+}
+
+/* 左側 */
+.todo-left {
+  text-align: left;
+  flex: 1; /* ←これ超重要 */
+  min-width: 0; /* ←これも重要（はみ出し防止） */
+}
+
+/* タイトル */
+.todo-title {
+  font-weight: bold;
+  word-break: break-word; /* 長い文字対応 */
+}
+
+/* 日付 */
+.todo-date {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 右側 */
+.todo-actions {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0; /* ボタン潰れ防止 */
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.logout-btn {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #fbffd2, #9ff9fc);
+}
+
+.logout-btn:hover {
+  opacity: 0.8;
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  width: 300px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.login-card h1 {
+  margin-bottom: 10px;
+}
+
+.login-card input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+
+  border: none;
+  border-radius: 10px;
+  background: #ff7eb3;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input-group {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: bold;
+}
