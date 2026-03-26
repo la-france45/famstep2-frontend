@@ -38,11 +38,8 @@ TODO完了（ポイント獲得）
 ### 子ユーザートップ
 ![子トップ](./images/child-top.png)
 
-### レベルアップ演出
-![levelup](./images/levelup.mp4)
-
-### 目標達成演出
-![complete](./images/complete.mp4)
+### レベルアップ&目標ポイント達成演出
+![levelup](./images/levelup-complete.gif)
 
 ## ■ 特徴・工夫した点
 ① ユーザー体験（UX）を重視した設計
